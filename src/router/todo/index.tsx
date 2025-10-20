@@ -1,3 +1,13 @@
+import TodoForm from './todoForm'
+import TodoList from './todoList'
+
 export default function Todo() {
-  return <>todo page works</>
+  return (
+    <>
+      <section>
+        <TodoForm />
+        <TodoList />
+      </section>
+    </>
+  )
 }
