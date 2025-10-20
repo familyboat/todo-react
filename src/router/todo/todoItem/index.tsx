@@ -9,6 +9,7 @@ import {
 import { useState } from 'react'
 import styles from './index.module.css'
 import clsx from 'clsx'
+import * as motion from 'motion/react-client'
 
 type TodoItemType = {
   index: number
@@ -33,7 +34,7 @@ export default function TodoItem(props: TodoItemType) {
 
   return (
     <>
-      <li className={styles.item}>
+      <motion.li className={styles.item} layout key={props.todo.uuid}>
         <span>{props.index}</span>
         {!isEditing ? (
           <span
@@ -90,7 +91,7 @@ export default function TodoItem(props: TodoItemType) {
             {isEditing ? '确认' : '编辑'}
           </button>
         )}
-      </li>
+      </motion.li>
     </>
   )
 }

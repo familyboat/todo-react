@@ -2,7 +2,7 @@ import { useTodosStore } from '@/stores/todo'
 import { useEffect } from 'react'
 import styles from './index.module.css'
 import TodoItem from '../todoItem'
-import { useAutoAnimate } from '@formkit/auto-animate/react'
+import * as motion from 'motion/react-client'
 
 export default function TodoList() {
   useTodosStore((state) => state.todos)
@@ -11,8 +11,6 @@ export default function TodoList() {
   const getDoneTodos = useTodosStore((state) => state.getDoneTodos)
   const getDeletedTodos = useTodosStore((state) => state.getDeletedTodos)
 
-  const [parent] = useAutoAnimate()
-
   useEffect(() => {
     loadFromDb()
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -20,20 +18,26 @@ export default function TodoList() {
 
   return (
     <>
-      <div className={styles.list} ref={parent}>
-        <header key="created">已创建</header>
+      <div className={styles.list}>
+        <motion.header layout key="created">
+          已创建
+        </motion.header>
         {getCreatedTodos().map((todo, index) => {
           return <TodoItem index={index} todo={todo} key={todo.uuid} />
         })}
-        <hr key="created-hr" />
+        <motion.hr layout key="created-hr" />
 
-        <header key="done">已完成</header>
+        <motion.header layout key="done">
+          已完成
+        </motion.header>
         {getDoneTodos().map((todo, index) => {
           return <TodoItem index={index} todo={todo} key={todo.uuid} />
         })}
-        <hr key="done-hr" />
+        <motion.hr layout key="done-hr" />
 
-        <header key="deleted">已删除</header>
+        <motion.header layout key="deleted">
+          已删除
+        </motion.header>
         {getDeletedTodos().map((todo, index) => {
           return <TodoItem index={index} todo={todo} key={todo.uuid} />
         })}
